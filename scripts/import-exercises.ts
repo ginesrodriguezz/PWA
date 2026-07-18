@@ -71,11 +71,13 @@ async function uploadMedia(exercise: DatasetExercise) {
 }
 
 function toRow(
-  exercise: DatasetExercise
+  exercise: DatasetExercise,
+  namesEs: Record<string, string>
 ): Database["public"]["Tables"]["exercises"]["Insert"] {
   return {
     external_id: exercise.id,
     name: exercise.name,
+    name_es: namesEs[exercise.id] ?? null,
     body_part: exercise.body_part as BodyPart,
     equipment: exercise.equipment,
     target: exercise.target,
@@ -96,6 +98,12 @@ async function main() {
   const exercises: DatasetExercise[] = JSON.parse(
     fs.readFileSync(jsonPath, "utf-8")
   )
+  const namesEs: Record<string, string> = JSON.parse(
+    fs.readFileSync(
+      path.join(__dirname, "data", "exercise-names-es.json"),
+      "utf-8"
+    )
+  )
 
   console.log(`Loaded ${exercises.length} exercises from ${jsonPath}`)
 
@@ -108,7 +116,10 @@ async function main() {
     console.log(`Uploaded media: ${uploaded}/${exercises.length}`)
   }
 
-  const rowBatches = chunk(exercises.map(toRow), UPSERT_BATCH_SIZE)
+  const rowBatches = chunk(
+    exercises.map((exercise) => toRow(exercise, namesEs)),
+    UPSERT_BATCH_SIZE
+  )
   let inserted = 0
 
   for (const rows of rowBatches) {

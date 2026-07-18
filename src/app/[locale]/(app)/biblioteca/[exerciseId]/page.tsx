@@ -6,7 +6,7 @@ import { getExerciseById } from "@/services/exercises"
 import { getExerciseMediaUrl } from "@/lib/exercise-media"
 import { Link } from "@/i18n/navigation"
 import { Badge } from "@/components/ui/badge"
-import { BODY_PART_LABEL_KEYS } from "@/types/domain"
+import { BODY_PART_LABEL_KEYS, getExerciseName } from "@/types/domain"
 
 export default async function ExerciseDetailPage({
   params,
@@ -28,6 +28,7 @@ export default async function ExerciseDetailPage({
       : exercise.instruction_steps_en
   const instructions =
     locale === "es" ? exercise.instructions_es : exercise.instructions_en
+  const name = getExerciseName(exercise, locale)
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -42,7 +43,7 @@ export default async function ExerciseDetailPage({
       <div className="flex flex-col items-center gap-2">
         <img
           src={getExerciseMediaUrl(exercise.gif_path)}
-          alt={exercise.name}
+          alt={name}
           width={240}
           height={240}
           className="size-60 rounded-xl border object-cover"
@@ -53,7 +54,7 @@ export default async function ExerciseDetailPage({
       </div>
 
       <div>
-        <h1 className="text-xl font-semibold">{exercise.name}</h1>
+        <h1 className="text-xl font-semibold">{name}</h1>
         <div className="mt-2 flex flex-wrap gap-1.5">
           <Badge variant="secondary">
             {t(`bodyParts.${BODY_PART_LABEL_KEYS[exercise.body_part]}`)}

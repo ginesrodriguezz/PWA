@@ -70,6 +70,7 @@ export type Database = {
           id: string
           external_id: string
           name: string
+          name_es: string | null
           body_part: BodyPart
           equipment: string
           target: string
@@ -88,6 +89,7 @@ export type Database = {
           id?: string
           external_id: string
           name: string
+          name_es?: string | null
           body_part: BodyPart
           equipment: string
           target: string
@@ -106,6 +108,7 @@ export type Database = {
           id?: string
           external_id?: string
           name?: string
+          name_es?: string | null
           body_part?: BodyPart
           equipment?: string
           target?: string

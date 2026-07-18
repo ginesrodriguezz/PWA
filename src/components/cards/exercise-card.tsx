@@ -1,13 +1,17 @@
 "use client"
 
 import { CheckIcon, PlusIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 import { getExerciseMediaUrl } from "@/lib/exercise-media"
-import { BODY_PART_LABEL_KEYS, type ExerciseListItem } from "@/types/domain"
+import {
+  BODY_PART_LABEL_KEYS,
+  getExerciseName,
+  type ExerciseListItem,
+} from "@/types/domain"
 
 export function ExerciseCard({
   exercise,
@@ -21,6 +25,8 @@ export function ExerciseCard({
   href?: string
 }) {
   const t = useTranslations("exercises")
+  const locale = useLocale()
+  const name = getExerciseName(exercise, locale)
 
   const content = (
     <div
@@ -31,14 +37,14 @@ export function ExerciseCard({
     >
       <img
         src={getExerciseMediaUrl(exercise.image_path)}
-        alt={exercise.name}
+        alt={name}
         width={56}
         height={56}
         loading="lazy"
         className="size-14 shrink-0 rounded-lg object-cover"
       />
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="truncate font-medium">{exercise.name}</span>
+        <span className="truncate font-medium">{name}</span>
         <Badge variant="secondary" className="w-fit">
           {t(`bodyParts.${BODY_PART_LABEL_KEYS[exercise.body_part]}`)}
         </Badge>

@@ -5,7 +5,7 @@ export type RoutineDay = Database["public"]["Tables"]["routine_days"]["Row"]
 export type Exercise = Database["public"]["Tables"]["exercises"]["Row"]
 export type ExerciseListItem = Pick<
   Exercise,
-  "id" | "name" | "body_part" | "equipment" | "target" | "image_path"
+  "id" | "name" | "name_es" | "body_part" | "equipment" | "target" | "image_path"
 >
 export type WorkoutExercise =
   Database["public"]["Tables"]["workout_exercises"]["Row"]
@@ -104,4 +104,13 @@ export const BODY_PART_LABEL_KEYS: Record<BodyPart, string> = {
   "upper arms": "upperArms",
   "upper legs": "upperLegs",
   waist: "waist",
+}
+
+// Exercise names only ship in English in the dataset — name_es is an
+// AI-generated translation backfilled separately, so it can be null.
+export function getExerciseName(
+  exercise: { name: string; name_es: string | null },
+  locale: string
+): string {
+  return locale === "es" ? (exercise.name_es ?? exercise.name) : exercise.name
 }

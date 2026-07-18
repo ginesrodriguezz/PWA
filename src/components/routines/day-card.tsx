@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { PlusIcon, Trash2Icon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -17,7 +17,7 @@ import {
   useUpdateRoutineDay,
   useUpdateWorkoutExercise,
 } from "@/hooks/use-routines"
-import { BODY_PART_LABEL_KEYS } from "@/types/domain"
+import { BODY_PART_LABEL_KEYS, getExerciseName } from "@/types/domain"
 import type { RoutineDayWithExercises } from "@/types/domain"
 
 export function DayCard({
@@ -29,6 +29,7 @@ export function DayCard({
 }) {
   const t = useTranslations("routines")
   const tExercises = useTranslations("exercises")
+  const locale = useLocale()
   const [name, setName] = React.useState(day.name)
   const [pickerOpen, setPickerOpen] = React.useState(false)
   const [confirmDelete, setConfirmDelete] = React.useState(false)
@@ -84,30 +85,35 @@ export function DayCard({
             <div className="flex items-center justify-between gap-2 rounded-lg border bg-background px-3 py-2">
               <div className="flex min-w-0 flex-col gap-0.5">
                 <span className="truncate text-sm font-medium">
-                  {we.exercise.name}
+                  {getExerciseName(we.exercise, locale)}
                 </span>
                 <Badge variant="secondary" className="w-fit text-[10px]">
                   {tExercises(`bodyParts.${BODY_PART_LABEL_KEYS[we.exercise.body_part]}`)}
                 </Badge>
               </div>
               <div className="flex items-center gap-2">
-                <Input
-                  type="number"
-                  min={1}
-                  max={20}
-                  defaultValue={we.target_sets}
-                  className="h-8 w-14 text-center"
-                  aria-label={t("targetSets")}
-                  onBlur={(e) => {
-                    const value = Number(e.target.value)
-                    if (value > 0 && value !== we.target_sets) {
-                      updateExercise.mutate({
-                        id: we.id,
-                        patch: { target_sets: value },
-                      })
-                    }
-                  }}
-                />
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className="text-[9px] leading-none text-muted-foreground">
+                    {t("sets")}
+                  </span>
+                  <Input
+                    type="number"
+                    min={1}
+                    max={20}
+                    defaultValue={we.target_sets}
+                    className="h-8 w-14 text-center"
+                    aria-label={t("targetSets")}
+                    onBlur={(e) => {
+                      const value = Number(e.target.value)
+                      if (value > 0 && value !== we.target_sets) {
+                        updateExercise.mutate({
+                          id: we.id,
+                          patch: { target_sets: value },
+                        })
+                      }
+                    }}
+                  />
+                </div>
                 <Button
                   type="button"
                   size="icon-sm"

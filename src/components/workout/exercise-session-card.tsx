@@ -1,14 +1,14 @@
 "use client"
 
 import { CheckIcon, PlusIcon } from "lucide-react"
-import { useFormatter, useTranslations } from "next-intl"
+import { useFormatter, useLocale, useTranslations } from "next-intl"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { WeightInput } from "@/components/inputs/weight-input"
 import { RepInput } from "@/components/inputs/rep-input"
 import { useAddWorkoutSet, useUpdateWorkoutSet } from "@/hooks/use-workout"
 import { cn } from "@/lib/utils"
-import { BODY_PART_LABEL_KEYS } from "@/types/domain"
+import { BODY_PART_LABEL_KEYS, getExerciseName } from "@/types/domain"
 import type {
   LastExerciseSets,
   WorkoutExerciseWithExercise,
@@ -29,6 +29,7 @@ export function ExerciseSessionCard({
   const t = useTranslations("workout")
   const tExercises = useTranslations("exercises")
   const format = useFormatter()
+  const locale = useLocale()
 
   const updateSet = useUpdateWorkoutSet(workoutId)
   const addSet = useAddWorkoutSet(workoutId)
@@ -41,7 +42,7 @@ export function ExerciseSessionCard({
       <div className="flex items-center justify-between gap-2">
         <div className="min-w-0">
           <p className="truncate font-semibold">
-            {workoutExercise.exercise.name}
+            {getExerciseName(workoutExercise.exercise, locale)}
           </p>
           <Badge variant="secondary" className="mt-1 w-fit text-[10px]">
             {tExercises(

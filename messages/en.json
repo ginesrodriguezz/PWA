@@ -86,6 +86,7 @@
     "exercisesInDay": "{count, plural, =0 {No exercises} one {1 exercise} other {# exercises}}",
     "addExercise": "Add exercise",
     "targetSets": "Target sets",
+    "sets": "Sets",
     "noExercisesInDay": "Add exercises to this day.",
     "deleteRoutineConfirmTitle": "Delete routine?",
     "deleteRoutineConfirmDescription": "Its days and assigned exercises will also be deleted. This action cannot be undone.",

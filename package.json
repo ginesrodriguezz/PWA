@@ -10,7 +10,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "import:exercises": "tsx scripts/import-exercises.ts"
+    "import:exercises": "tsx scripts/import-exercises.ts",
+    "set:exercise-names-es": "tsx scripts/set-exercise-names-es.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

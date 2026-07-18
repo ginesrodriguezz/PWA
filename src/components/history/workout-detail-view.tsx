@@ -1,9 +1,9 @@
 import { ArrowLeftIcon, CheckIcon } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import { BODY_PART_LABEL_KEYS } from "@/types/domain"
+import { BODY_PART_LABEL_KEYS, getExerciseName } from "@/types/domain"
 import type { WorkoutSession } from "@/types/domain"
 
 function formatDuration(startedAt: string, finishedAt: string) {
@@ -22,6 +22,7 @@ export async function WorkoutDetailView({
   const t = await getTranslations("history")
   const tExercises = await getTranslations("exercises")
   const tWorkout = await getTranslations("workout")
+  const locale = await getLocale()
   const format = new Intl.DateTimeFormat(undefined, {
     day: "numeric",
     month: "long",
@@ -56,7 +57,9 @@ export async function WorkoutDetailView({
           return (
             <div key={we.id} className="rounded-xl border bg-card p-4">
               <div className="flex items-center justify-between">
-                <p className="font-semibold">{we.exercise.name}</p>
+                <p className="font-semibold">
+                  {getExerciseName(we.exercise, locale)}
+                </p>
                 <Badge variant="secondary" className="text-[10px]">
                   {tExercises(`bodyParts.${BODY_PART_LABEL_KEYS[we.exercise.body_part]}`)}
                 </Badge>

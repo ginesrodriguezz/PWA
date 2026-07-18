@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation"
 import { ArrowLeftIcon, TrophyIcon } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { createClient } from "@/lib/supabase/server"
 import { getExerciseProgress } from "@/services/progress"
 import { Link } from "@/i18n/navigation"
 import { Badge } from "@/components/ui/badge"
 import { StatsCard } from "@/components/cards/stats-card"
 import { ExerciseProgressCharts } from "@/components/progress/exercise-progress-charts"
-import { BODY_PART_LABEL_KEYS } from "@/types/domain"
+import { BODY_PART_LABEL_KEYS, getExerciseName } from "@/types/domain"
 
 export default async function ExerciseProgressPage({
   params,
@@ -31,6 +31,7 @@ export default async function ExerciseProgressPage({
   const progress = await getExerciseProgress(supabase, user!.id, exerciseId)
   const t = await getTranslations("progress")
   const tExercises = await getTranslations("exercises")
+  const locale = await getLocale()
 
   const personalRecord = progress.reduce(
     (max, p) => Math.max(max, p.maxWeight),
@@ -50,7 +51,9 @@ export default async function ExerciseProgressPage({
       </Link>
 
       <div>
-        <h1 className="text-xl font-semibold">{exercise.name}</h1>
+        <h1 className="text-xl font-semibold">
+          {getExerciseName(exercise, locale)}
+        </h1>
         <Badge variant="secondary" className="mt-1 w-fit">
           {tExercises(`bodyParts.${BODY_PART_LABEL_KEYS[exercise.body_part]}`)}
         </Badge>
