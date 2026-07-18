@@ -12,7 +12,10 @@
     "close": "Cerrar",
     "confirm": "Confirmar",
     "finish": "Finalizar",
-    "start": "Comenzar"
+    "start": "Comenzar",
+    "errorTitle": "Algo ha ido mal",
+    "errorDescription": "No hemos podido cargar esta pantalla. Inténtalo de nuevo.",
+    "retry": "Reintentar"
   },
   "nav": {
     "home": "Inicio",
@@ -153,5 +156,14 @@
     "bestReps": "Mayor repetición",
     "weightChart": "Peso máximo por sesión",
     "volumeChart": "Volumen por sesión"
+  },
+  "profile": {
+    "title": "Perfil",
+    "email": "Correo electrónico",
+    "nameUpdated": "Nombre actualizado",
+    "passwordChanged": "Contraseña actualizada",
+    "changePassword": "Cambiar contraseña",
+    "logoutConfirmTitle": "¿Cerrar sesión?",
+    "logoutConfirmDescription": "Tendrás que volver a iniciar sesión para acceder a tu cuenta."
   }
 }

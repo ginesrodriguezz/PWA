@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import { Providers } from "../providers"
+import { PwaRegister } from "@/components/pwa-register"
 import "../globals.css"
 
 const geistSans = Geist({
@@ -25,6 +26,15 @@ export const metadata: Metadata = {
   title: "Gym Progress Tracker",
   description: "Registra tus entrenamientos y mide tu progreso en el gimnasio.",
   manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Gym Tracker",
+  },
 }
 
 export const viewport: Viewport = {
@@ -60,6 +70,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>{children}</Providers>
+          <PwaRegister />
         </NextIntlClientProvider>
       </body>
     </html>
