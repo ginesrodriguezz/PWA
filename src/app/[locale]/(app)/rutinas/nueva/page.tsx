@@ -86,7 +86,7 @@ export default function NuevaRutinaPage() {
           <Button
             type="submit"
             className="mt-2 h-10 rounded-full"
-            disabled={createRoutine.isPending}
+            loading={createRoutine.isPending}
           >
             {t("create")}
           </Button>

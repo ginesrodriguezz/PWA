@@ -43,7 +43,7 @@ export function ConfirmDialog({
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             {t("cancel")}
           </Button>
-          <Button variant={variant} disabled={isPending} onClick={onConfirm}>
+          <Button variant={variant} loading={isPending} onClick={onConfirm}>
             {confirmLabel ?? t("delete")}
           </Button>
         </DialogFooter>

@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
     startTransition(async () => {
       const result = await forgotPassword(locale, data)
       if (result.error) {
-        toast.error(result.error)
+        toast.error(t(result.error))
       } else {
         setSent(true)
       }
@@ -81,7 +81,7 @@ export default function ForgotPasswordPage() {
             <Button
               type="submit"
               className="mt-2 h-10 rounded-full"
-              disabled={isPending}
+              loading={isPending}
             >
               {t("sendResetLink")}
             </Button>

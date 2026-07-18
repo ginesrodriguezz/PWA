@@ -37,11 +37,7 @@ export default function ResetPasswordPage() {
     startTransition(async () => {
       const result = await resetPassword(data)
       if (result.error) {
-        toast.error(
-          result.error === "passwordMismatch"
-            ? t("passwordMismatch")
-            : result.error
-        )
+        toast.error(t(result.error))
       } else {
         setDone(true)
       }
@@ -110,7 +106,7 @@ export default function ResetPasswordPage() {
             <Button
               type="submit"
               className="mt-2 h-10 rounded-full"
-              disabled={isPending}
+              loading={isPending}
             >
               {tCommon("save")}
             </Button>

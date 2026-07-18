@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { createClient } from "@/lib/supabase/server"
+import { mapAuthError } from "@/lib/auth-errors"
 import { updateNameSchema, type UpdateNameInput } from "@/lib/validations/profile"
 import {
   resetPasswordSchema,
@@ -20,7 +21,7 @@ export async function updateProfileName(
   const { error } = await supabase.auth.updateUser({
     data: { name: parsed.data.name },
   })
-  if (error) return { error: error.message }
+  if (error) return { error: mapAuthError(error.message) }
 
   revalidatePath("/", "layout")
   return { error: null }
@@ -36,7 +37,7 @@ export async function changePassword(
   const { error } = await supabase.auth.updateUser({
     password: parsed.data.password,
   })
-  if (error) return { error: error.message }
+  if (error) return { error: mapAuthError(error.message) }
 
   return { error: null }
 }

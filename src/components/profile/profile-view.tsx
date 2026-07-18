@@ -54,7 +54,7 @@ export function ProfileView({
 
   function onSaveName(data: UpdateNameInput) {
     updateProfileName(data).then((result) => {
-      if (result.error) toast.error(result.error)
+      if (result.error) toast.error(tAuth(result.error))
       else toast.success(t("nameUpdated"))
     })
   }
@@ -62,11 +62,7 @@ export function ProfileView({
   function onChangePassword(data: ResetPasswordInput) {
     changePassword(data).then((result) => {
       if (result.error) {
-        toast.error(
-          result.error === "passwordMismatch"
-            ? tAuth("passwordMismatch")
-            : result.error
-        )
+        toast.error(tAuth(result.error))
       } else {
         toast.success(t("passwordChanged"))
         passwordForm.reset()
@@ -105,7 +101,7 @@ export function ProfileView({
             type="submit"
             size="sm"
             className="w-fit rounded-full"
-            disabled={nameForm.formState.isSubmitting}
+            loading={nameForm.formState.isSubmitting}
           >
             {tCommon("save")}
           </Button>
@@ -148,7 +144,7 @@ export function ProfileView({
             type="submit"
             size="sm"
             className="w-fit rounded-full"
-            disabled={passwordForm.formState.isSubmitting}
+            loading={passwordForm.formState.isSubmitting}
           >
             {tCommon("save")}
           </Button>

@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { LocaleSwitcher } from "@/components/layout/locale-switcher"
+import { Link } from "@/i18n/navigation"
 
 export default async function Home({
   params,
@@ -34,7 +35,11 @@ export default async function Home({
         <p className="max-w-sm text-balance text-muted-foreground">
           {t("subtitle")}
         </p>
-        <Button size="lg" className="h-11 rounded-full px-8 text-base">
+        <Button
+          size="lg"
+          className="h-11 rounded-full px-8 text-base"
+          render={<Link href="/register" />}
+        >
           {t("cta")}
         </Button>
       </main>

@@ -32,13 +32,7 @@ export default function RegisterPage() {
   function onSubmit(data: RegisterInput) {
     startTransition(async () => {
       const result = await registerAction(locale, data)
-      if (result.error) {
-        toast.error(
-          result.error === "passwordMismatch"
-            ? t("passwordMismatch")
-            : result.error
-        )
-      }
+      if (result.error) toast.error(t(result.error))
     })
   }
 
@@ -121,7 +115,7 @@ export default function RegisterPage() {
           <Button
             type="submit"
             className="mt-2 h-10 rounded-full"
-            disabled={isPending}
+            loading={isPending}
           >
             {t("register")}
           </Button>

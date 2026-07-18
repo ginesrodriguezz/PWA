@@ -74,7 +74,7 @@ export function EntrenarView({ days }: { days: DayWithRoutine[] }) {
                 <Button
                   size="sm"
                   className="shrink-0 rounded-full"
-                  disabled={startWorkout.isPending}
+                  loading={startWorkout.isPending}
                   onClick={() => handleStart(day.id)}
                 >
                   <PlayIcon className="size-4" />

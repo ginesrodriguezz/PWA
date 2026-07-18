@@ -32,7 +32,7 @@ export default function LoginPage() {
   function onSubmit(data: LoginInput) {
     startTransition(async () => {
       const result = await login(locale, data)
-      if (result.error) toast.error(result.error)
+      if (result.error) toast.error(t(result.error))
     })
   }
 
@@ -91,7 +91,7 @@ export default function LoginPage() {
           <Button
             type="submit"
             className="mt-2 h-10 rounded-full"
-            disabled={isPending}
+            loading={isPending}
           >
             {t("login")}
           </Button>

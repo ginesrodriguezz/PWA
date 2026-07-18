@@ -124,7 +124,7 @@ export function RoutineEditor({ routine }: { routine: RoutineWithDays }) {
             onChange={(e) => setNewDayName(e.target.value)}
             placeholder={t("dayNamePlaceholder")}
           />
-          <Button type="submit" disabled={createDay.isPending}>
+          <Button type="submit" loading={createDay.isPending}>
             <PlusIcon className="size-4" />
             {t("addDay")}
           </Button>
@@ -154,7 +154,7 @@ export function RoutineEditor({ routine }: { routine: RoutineWithDays }) {
             </Button>
             <Button
               onClick={handleSaveRoutine}
-              disabled={updateRoutine.isPending}
+              loading={updateRoutine.isPending}
             >
               {tCommon("save")}
             </Button>

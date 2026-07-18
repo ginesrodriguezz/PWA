@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
+import { mapAuthError } from "@/lib/auth-errors"
 import {
   forgotPasswordSchema,
   loginSchema,
@@ -24,7 +25,7 @@ export async function login(
 
   const supabase = await createClient()
   const { error } = await supabase.auth.signInWithPassword(parsed.data)
-  if (error) return { error: error.message }
+  if (error) return { error: mapAuthError(error.message) }
 
   redirect(`/${locale}/dashboard`)
 }
@@ -42,7 +43,7 @@ export async function register(
     password: parsed.data.password,
     options: { data: { name: parsed.data.name } },
   })
-  if (error) return { error: error.message }
+  if (error) return { error: mapAuthError(error.message) }
 
   redirect(`/${locale}/dashboard`)
 }
@@ -62,7 +63,7 @@ export async function forgotPassword(
   )
   // Note: `redirectTo` becomes the `next` param inside the Supabase "Reset
   // Password" email template — see README for the required template.
-  if (error) return { error: error.message }
+  if (error) return { error: mapAuthError(error.message) }
 
   return { error: null }
 }
@@ -77,7 +78,7 @@ export async function resetPassword(
   const { error } = await supabase.auth.updateUser({
     password: parsed.data.password,
   })
-  if (error) return { error: error.message }
+  if (error) return { error: mapAuthError(error.message) }
 
   return { error: null }
 }

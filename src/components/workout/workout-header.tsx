@@ -60,7 +60,7 @@ export function WorkoutHeader({
         size="sm"
         className="shrink-0 rounded-full"
         onClick={onFinish}
-        disabled={isFinishing}
+        loading={isFinishing}
       >
         <CheckIcon className="size-4" />
         {t("finishWorkout")}
