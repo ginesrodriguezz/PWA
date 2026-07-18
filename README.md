@@ -23,7 +23,7 @@ App web mobile-first para registrar entrenamientos de gimnasio: rutinas, series,
 
 1. Crea un proyecto nuevo en [supabase.com/dashboard](https://supabase.com/dashboard).
 2. Ve a **Project Settings → API** y copia `Project URL` y `anon public key`.
-3. Ve a **SQL Editor** y ejecuta, en orden, los archivos de `supabase/migrations/` (`0001_init.sql`, `0002_rls.sql`, `0003_seed_exercises.sql`). También puedes aplicarlos con la [Supabase CLI](https://supabase.com/docs/guides/cli): `supabase db push`.
+3. Ve a **SQL Editor** y ejecuta, en orden, todos los archivos de `supabase/migrations/` (`0001_init.sql` → `0006_restore_workout_exercises_fk.sql`). También puedes aplicarlos con la [Supabase CLI](https://supabase.com/docs/guides/cli): `supabase db push`. Tras `0005_exercise_library.sql`, importa el catálogo de ejercicios con `npm run import:exercises` (ver variables de entorno adicionales que requiere en `scripts/import-exercises.ts`).
 4. (Opcional) Regenera los tipos TypeScript desde el esquema real:
 
    ```bash
@@ -89,7 +89,19 @@ supabase/migrations/ Migraciones SQL (schema, RLS, seed)
 - `npm run build` — build de producción
 - `npm run start` — servidor de producción
 - `npm run lint` — linting
+- `npm run import:exercises` — importa el catálogo de ejercicios (imágenes/gifs + metadatos) a Supabase Storage/DB. Solo se ejecuta manualmente y en local, requiere `SUPABASE_SERVICE_ROLE_KEY` — **no** se usa en el build de Vercel.
 
 ## Despliegue
 
-Listo para desplegar en [Vercel](https://vercel.com/new): importar el repositorio y configurar `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` como variables de entorno del proyecto.
+Listo para desplegar en [Vercel](https://vercel.com/new): importar el repositorio y configurar como variables de entorno del proyecto (Production y Preview):
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (la clave `publishable`, nunca la `service_role`/`secret`)
+- `NEXT_PUBLIC_SITE_URL` — la URL pública del despliegue (p. ej. `https://tu-app.vercel.app` o el dominio propio)
+
+No añadas `SUPABASE_SERVICE_ROLE_KEY` ni `PASSWORD` a Vercel: no los usa la aplicación, solo el script de importación local.
+
+Después del primer despliegue, en el Dashboard de Supabase → **Authentication → URL Configuration**:
+
+- **Site URL**: la misma URL de producción.
+- **Redirect URLs**: añade `https://tu-app.vercel.app/**` (y el dominio propio si lo usas, y las URLs de preview de Vercel si las necesitas) — si no, los enlaces de confirmación de email y de restablecimiento de contraseña seguirán apuntando a `localhost`.
