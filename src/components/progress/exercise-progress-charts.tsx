@@ -1,0 +1,83 @@
+"use client"
+
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts"
+import { useFormatter, useTranslations } from "next-intl"
+import type { ExerciseProgressPoint } from "@/types/domain"
+
+export function ExerciseProgressCharts({
+  data,
+}: {
+  data: ExerciseProgressPoint[]
+}) {
+  const t = useTranslations("progress")
+  const format = useFormatter()
+
+  const chartData = data.map((d) => ({
+    ...d,
+    label: format.dateTime(new Date(d.date), { day: "numeric", month: "short" }),
+  }))
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="rounded-xl border bg-card p-4">
+        <p className="mb-2 text-xs font-medium text-muted-foreground">
+          {t("weightChart")}
+        </p>
+        <div className="h-40 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={chartData} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="label" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 10 }} tickLine={false} axisLine={false} width={32} />
+              <Tooltip
+                formatter={(value) => [`${Number(value)} kg`, ""]}
+                contentStyle={{ fontSize: 12 }}
+              />
+              <Line
+                type="monotone"
+                dataKey="maxWeight"
+                stroke="var(--primary)"
+                strokeWidth={2}
+                dot={{ r: 3 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div className="rounded-xl border bg-card p-4">
+        <p className="mb-2 text-xs font-medium text-muted-foreground">
+          {t("volumeChart")}
+        </p>
+        <div className="h-40 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={chartData} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="label" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 10 }} tickLine={false} axisLine={false} width={32} />
+              <Tooltip
+                formatter={(value) => [`${Number(value)} kg`, ""]}
+                contentStyle={{ fontSize: 12 }}
+              />
+              <Line
+                type="monotone"
+                dataKey="volume"
+                stroke="var(--chart-2, var(--primary))"
+                strokeWidth={2}
+                dot={{ r: 3 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  )
+}
