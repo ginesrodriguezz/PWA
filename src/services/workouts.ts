@@ -88,7 +88,10 @@ export async function ensureWorkoutSets(
 
   if (rows.length === 0) return
 
-  const { error } = await supabase.from("workout_sets").insert(rows)
+  const { error } = await supabase.from("workout_sets").upsert(rows, {
+    onConflict: "workout_exercise_id,set_number",
+    ignoreDuplicates: true,
+  })
   if (error) throw error
 }
 
