@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
 import { ExerciseCard } from "@/components/cards/exercise-card"
-import { MuscleGroupFilter } from "@/components/exercises/muscle-group-filter"
+import { BodyPartFilter } from "@/components/exercises/body-part-filter"
 import { useExercises } from "@/hooks/use-exercises"
-import type { MuscleGroup } from "@/types/domain"
+import type { BodyPart } from "@/types/domain"
 import { cn } from "@/lib/utils"
 
 export function ExercisePicker({
@@ -30,11 +30,9 @@ export function ExercisePicker({
 }) {
   const t = useTranslations("exercises")
   const [search, setSearch] = React.useState("")
-  const [muscleGroup, setMuscleGroup] = React.useState<MuscleGroup | "all">(
-    "all"
-  )
+  const [bodyPart, setBodyPart] = React.useState<BodyPart | "all">("all")
 
-  const { data: exercises, isLoading } = useExercises({ search, muscleGroup })
+  const { data: exercises, isLoading } = useExercises({ search, bodyPart })
   const existing = new Set(existingExerciseIds)
 
   return (
@@ -56,12 +54,12 @@ export function ExercisePicker({
             />
           </div>
 
-          <MuscleGroupFilter value={muscleGroup} onChange={setMuscleGroup} />
+          <BodyPartFilter value={bodyPart} onChange={setBodyPart} />
         </div>
 
         <div
           className={cn(
-            "flex flex-col gap-2 overflow-y-auto px-4 pb-4",
+            "flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-4 pb-4",
             isLoading && "opacity-50"
           )}
         >
@@ -78,6 +76,11 @@ export function ExercisePicker({
               onAdd={() => onAdd(exercise.id)}
             />
           ))}
+          {exercises && exercises.length > 0 && (
+            <p className="pt-2 text-center text-[11px] text-muted-foreground">
+              {t("mediaAttribution")}
+            </p>
+          )}
         </div>
       </SheetContent>
     </Sheet>

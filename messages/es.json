@@ -45,6 +45,10 @@
     "passwordUpdated": "Contraseña actualizada. Ya puedes iniciar sesión.",
     "invalidInput": "Revisa los datos introducidos.",
     "passwordMismatch": "Las contraseñas no coinciden.",
+    "invalidCredentials": "Correo o contraseña incorrectos.",
+    "emailNotConfirmed": "Confirma tu correo electrónico antes de iniciar sesión.",
+    "userAlreadyRegistered": "Ya existe una cuenta con este correo electrónico.",
+    "unexpectedError": "Algo salió mal. Inténtalo de nuevo.",
     "loginSubtitle": "Accede para seguir tu progreso.",
     "registerSubtitle": "Crea tu cuenta gratis en segundos.",
     "forgotPasswordSubtitle": "Te enviaremos un enlace a tu correo."
@@ -58,6 +62,10 @@
     "light": "Claro",
     "dark": "Oscuro",
     "system": "Sistema"
+  },
+  "languages": {
+    "es": "Español",
+    "en": "Inglés"
   },
   "routines": {
     "title": "Mis rutinas",
@@ -90,18 +98,22 @@
   "exercises": {
     "title": "Biblioteca de ejercicios",
     "searchPlaceholder": "Buscar ejercicio...",
-    "allMuscleGroups": "Todos",
+    "allBodyParts": "Todos",
     "noResults": "No se encontraron ejercicios.",
-    "muscleGroups": {
-      "chest": "Pecho",
+    "instructions": "Instrucciones",
+    "secondaryMuscles": "Músculos secundarios",
+    "mediaAttribution": "© Gym visual — https://gymvisual.com/",
+    "bodyParts": {
       "back": "Espalda",
-      "legs": "Pierna",
-      "shoulders": "Hombro",
-      "biceps": "Bíceps",
-      "triceps": "Tríceps",
-      "core": "Core",
-      "glutes": "Glúteo",
-      "calves": "Gemelos"
+      "cardio": "Cardio",
+      "chest": "Pecho",
+      "lowerArms": "Antebrazos",
+      "lowerLegs": "Piernas inferiores",
+      "neck": "Cuello",
+      "shoulders": "Hombros",
+      "upperArms": "Brazos",
+      "upperLegs": "Piernas superiores",
+      "waist": "Cintura"
     }
   },
   "workout": {

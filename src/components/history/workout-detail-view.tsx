@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { BODY_PART_LABEL_KEYS } from "@/types/domain"
 import type { WorkoutSession } from "@/types/domain"
 
 function formatDuration(startedAt: string, finishedAt: string) {
@@ -57,7 +58,7 @@ export async function WorkoutDetailView({
               <div className="flex items-center justify-between">
                 <p className="font-semibold">{we.exercise.name}</p>
                 <Badge variant="secondary" className="text-[10px]">
-                  {tExercises(`muscleGroups.${we.exercise.muscle_group}`)}
+                  {tExercises(`bodyParts.${BODY_PART_LABEL_KEYS[we.exercise.body_part]}`)}
                 </Badge>
               </div>
               <div className="mt-2 flex flex-col gap-1.5">

@@ -17,6 +17,7 @@ import {
   useUpdateRoutineDay,
   useUpdateWorkoutExercise,
 } from "@/hooks/use-routines"
+import { BODY_PART_LABEL_KEYS } from "@/types/domain"
 import type { RoutineDayWithExercises } from "@/types/domain"
 
 export function DayCard({
@@ -86,7 +87,7 @@ export function DayCard({
                   {we.exercise.name}
                 </span>
                 <Badge variant="secondary" className="w-fit text-[10px]">
-                  {tExercises(`muscleGroups.${we.exercise.muscle_group}`)}
+                  {tExercises(`bodyParts.${BODY_PART_LABEL_KEYS[we.exercise.body_part]}`)}
                 </Badge>
               </div>
               <div className="flex items-center gap-2">

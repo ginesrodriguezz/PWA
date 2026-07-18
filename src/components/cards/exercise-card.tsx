@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
-import type { Exercise } from "@/types/domain"
+import { getExerciseMediaUrl } from "@/lib/exercise-media"
+import { BODY_PART_LABEL_KEYS, type ExerciseListItem } from "@/types/domain"
 
 export function ExerciseCard({
   exercise,
@@ -14,7 +15,7 @@ export function ExerciseCard({
   added,
   href,
 }: {
-  exercise: Exercise
+  exercise: ExerciseListItem
   onAdd?: () => void
   added?: boolean
   href?: string
@@ -28,10 +29,18 @@ export function ExerciseCard({
         href && "transition-colors hover:bg-muted/40"
       )}
     >
-      <div className="flex min-w-0 flex-col gap-1">
+      <img
+        src={getExerciseMediaUrl(exercise.image_path)}
+        alt={exercise.name}
+        width={56}
+        height={56}
+        loading="lazy"
+        className="size-14 shrink-0 rounded-lg object-cover"
+      />
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
         <span className="truncate font-medium">{exercise.name}</span>
         <Badge variant="secondary" className="w-fit">
-          {t(`muscleGroups.${exercise.muscle_group}`)}
+          {t(`bodyParts.${BODY_PART_LABEL_KEYS[exercise.body_part]}`)}
         </Badge>
       </div>
       {onAdd && (

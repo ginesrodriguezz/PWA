@@ -45,6 +45,10 @@
     "passwordUpdated": "Password updated. You can now log in.",
     "invalidInput": "Check the entered data.",
     "passwordMismatch": "Passwords don't match.",
+    "invalidCredentials": "Incorrect email or password.",
+    "emailNotConfirmed": "Please confirm your email before logging in.",
+    "userAlreadyRegistered": "An account with this email already exists.",
+    "unexpectedError": "Something went wrong. Please try again.",
     "loginSubtitle": "Log in to keep tracking your progress.",
     "registerSubtitle": "Create your free account in seconds.",
     "forgotPasswordSubtitle": "We'll send a link to your email."
@@ -58,6 +62,10 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "languages": {
+    "es": "Spanish",
+    "en": "English"
   },
   "routines": {
     "title": "My routines",
@@ -90,18 +98,22 @@
   "exercises": {
     "title": "Exercise library",
     "searchPlaceholder": "Search exercise...",
-    "allMuscleGroups": "All",
+    "allBodyParts": "All",
     "noResults": "No exercises found.",
-    "muscleGroups": {
-      "chest": "Chest",
+    "instructions": "Instructions",
+    "secondaryMuscles": "Secondary muscles",
+    "mediaAttribution": "© Gym visual — https://gymvisual.com/",
+    "bodyParts": {
       "back": "Back",
-      "legs": "Legs",
+      "cardio": "Cardio",
+      "chest": "Chest",
+      "lowerArms": "Lower arms",
+      "lowerLegs": "Lower legs",
+      "neck": "Neck",
       "shoulders": "Shoulders",
-      "biceps": "Biceps",
-      "triceps": "Triceps",
-      "core": "Core",
-      "glutes": "Glutes",
-      "calves": "Calves"
+      "upperArms": "Upper arms",
+      "upperLegs": "Upper legs",
+      "waist": "Waist"
     }
   },
   "workout": {

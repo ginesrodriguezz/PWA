@@ -5,25 +5,23 @@ import { SearchIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Input } from "@/components/ui/input"
 import { ExerciseCard } from "@/components/cards/exercise-card"
-import { MuscleGroupFilter } from "@/components/exercises/muscle-group-filter"
+import { BodyPartFilter } from "@/components/exercises/body-part-filter"
 import { useExercises } from "@/hooks/use-exercises"
-import type { Exercise, MuscleGroup } from "@/types/domain"
+import type { BodyPart, ExerciseListItem } from "@/types/domain"
 
 export function ProgressExerciseList({
   initialExercises,
 }: {
-  initialExercises: Exercise[]
+  initialExercises: ExerciseListItem[]
 }) {
   const t = useTranslations("exercises")
   const tProgress = useTranslations("progress")
   const [search, setSearch] = React.useState("")
-  const [muscleGroup, setMuscleGroup] = React.useState<MuscleGroup | "all">(
-    "all"
-  )
+  const [bodyPart, setBodyPart] = React.useState<BodyPart | "all">("all")
 
-  const { data: exercises } = useExercises({ search, muscleGroup })
+  const { data: exercises } = useExercises({ search, bodyPart })
   const list =
-    search === "" && muscleGroup === "all"
+    search === "" && bodyPart === "all"
       ? (exercises ?? initialExercises)
       : (exercises ?? [])
 
@@ -44,7 +42,7 @@ export function ProgressExerciseList({
         />
       </div>
 
-      <MuscleGroupFilter value={muscleGroup} onChange={setMuscleGroup} />
+      <BodyPartFilter value={bodyPart} onChange={setBodyPart} />
 
       <div className="flex flex-col gap-2">
         {list.length === 0 && (
@@ -60,6 +58,12 @@ export function ProgressExerciseList({
           />
         ))}
       </div>
+
+      {list.length > 0 && (
+        <p className="pt-2 text-center text-[11px] text-muted-foreground">
+          {t("mediaAttribution")}
+        </p>
+      )}
     </div>
   )
 }

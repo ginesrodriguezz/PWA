@@ -1,13 +1,14 @@
-export type MuscleGroup =
-  | "chest"
+export type BodyPart =
   | "back"
-  | "legs"
+  | "cardio"
+  | "chest"
+  | "lower arms"
+  | "lower legs"
+  | "neck"
   | "shoulders"
-  | "biceps"
-  | "triceps"
-  | "core"
-  | "glutes"
-  | "calves"
+  | "upper arms"
+  | "upper legs"
+  | "waist"
 
 export type Database = {
   public: {
@@ -67,23 +68,56 @@ export type Database = {
       exercises: {
         Row: {
           id: string
+          external_id: string
           name: string
-          muscle_group: MuscleGroup
-          image_url: string | null
+          body_part: BodyPart
+          equipment: string
+          target: string
+          primary_muscle: string
+          secondary_muscles: string[]
+          instructions_en: string
+          instructions_es: string
+          instruction_steps_en: string[]
+          instruction_steps_es: string[]
+          image_path: string
+          gif_path: string
+          attribution: string
           created_at: string
         }
         Insert: {
           id?: string
+          external_id: string
           name: string
-          muscle_group: MuscleGroup
-          image_url?: string | null
+          body_part: BodyPart
+          equipment: string
+          target: string
+          primary_muscle: string
+          secondary_muscles?: string[]
+          instructions_en: string
+          instructions_es: string
+          instruction_steps_en?: string[]
+          instruction_steps_es?: string[]
+          image_path: string
+          gif_path: string
+          attribution?: string
           created_at?: string
         }
         Update: {
           id?: string
+          external_id?: string
           name?: string
-          muscle_group?: MuscleGroup
-          image_url?: string | null
+          body_part?: BodyPart
+          equipment?: string
+          target?: string
+          primary_muscle?: string
+          secondary_muscles?: string[]
+          instructions_en?: string
+          instructions_es?: string
+          instruction_steps_en?: string[]
+          instruction_steps_es?: string[]
+          image_path?: string
+          gif_path?: string
+          attribution?: string
           created_at?: string
         }
         Relationships: []

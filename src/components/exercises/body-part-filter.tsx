@@ -2,14 +2,14 @@
 
 import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
-import { MUSCLE_GROUPS, type MuscleGroup } from "@/types/domain"
+import { BODY_PARTS, BODY_PART_LABEL_KEYS, type BodyPart } from "@/types/domain"
 
-export function MuscleGroupFilter({
+export function BodyPartFilter({
   value,
   onChange,
 }: {
-  value: MuscleGroup | "all"
-  onChange: (value: MuscleGroup | "all") => void
+  value: BodyPart | "all"
+  onChange: (value: BodyPart | "all") => void
 }) {
   const t = useTranslations("exercises")
 
@@ -22,18 +22,18 @@ export function MuscleGroupFilter({
         className="shrink-0 rounded-full"
         onClick={() => onChange("all")}
       >
-        {t("allMuscleGroups")}
+        {t("allBodyParts")}
       </Button>
-      {MUSCLE_GROUPS.map((mg) => (
+      {BODY_PARTS.map((bp) => (
         <Button
-          key={mg}
+          key={bp}
           type="button"
           size="sm"
-          variant={value === mg ? "default" : "outline"}
+          variant={value === bp ? "default" : "outline"}
           className="shrink-0 rounded-full"
-          onClick={() => onChange(mg)}
+          onClick={() => onChange(bp)}
         >
-          {t(`muscleGroups.${mg}`)}
+          {t(`bodyParts.${BODY_PART_LABEL_KEYS[bp]}`)}
         </Button>
       ))}
     </div>

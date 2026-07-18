@@ -8,6 +8,7 @@ import { WeightInput } from "@/components/inputs/weight-input"
 import { RepInput } from "@/components/inputs/rep-input"
 import { useAddWorkoutSet, useUpdateWorkoutSet } from "@/hooks/use-workout"
 import { cn } from "@/lib/utils"
+import { BODY_PART_LABEL_KEYS } from "@/types/domain"
 import type {
   LastExerciseSets,
   WorkoutExerciseWithExercise,
@@ -43,7 +44,9 @@ export function ExerciseSessionCard({
             {workoutExercise.exercise.name}
           </p>
           <Badge variant="secondary" className="mt-1 w-fit text-[10px]">
-            {tExercises(`muscleGroups.${workoutExercise.exercise.muscle_group}`)}
+            {tExercises(
+              `bodyParts.${BODY_PART_LABEL_KEYS[workoutExercise.exercise.body_part]}`
+            )}
           </Badge>
         </div>
         <div className="shrink-0 text-right text-xs text-muted-foreground">
@@ -115,7 +118,7 @@ export function ExerciseSessionCard({
         variant="outline"
         size="sm"
         className="mt-3 w-full rounded-full"
-        disabled={addSet.isPending}
+        loading={addSet.isPending}
         onClick={() =>
           addSet.mutate({
             workoutExerciseId: workoutExercise.id,

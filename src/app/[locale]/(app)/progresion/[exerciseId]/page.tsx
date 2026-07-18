@@ -7,6 +7,7 @@ import { Link } from "@/i18n/navigation"
 import { Badge } from "@/components/ui/badge"
 import { StatsCard } from "@/components/cards/stats-card"
 import { ExerciseProgressCharts } from "@/components/progress/exercise-progress-charts"
+import { BODY_PART_LABEL_KEYS } from "@/types/domain"
 
 export default async function ExerciseProgressPage({
   params,
@@ -51,7 +52,7 @@ export default async function ExerciseProgressPage({
       <div>
         <h1 className="text-xl font-semibold">{exercise.name}</h1>
         <Badge variant="secondary" className="mt-1 w-fit">
-          {tExercises(`muscleGroups.${exercise.muscle_group}`)}
+          {tExercises(`bodyParts.${BODY_PART_LABEL_KEYS[exercise.body_part]}`)}
         </Badge>
       </div>
 

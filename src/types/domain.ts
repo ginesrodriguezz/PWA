@@ -1,8 +1,12 @@
-import type { Database, MuscleGroup } from "./database.types"
+import type { Database, BodyPart } from "./database.types"
 
 export type Routine = Database["public"]["Tables"]["routines"]["Row"]
 export type RoutineDay = Database["public"]["Tables"]["routine_days"]["Row"]
 export type Exercise = Database["public"]["Tables"]["exercises"]["Row"]
+export type ExerciseListItem = Pick<
+  Exercise,
+  "id" | "name" | "body_part" | "equipment" | "target" | "image_path"
+>
 export type WorkoutExercise =
   Database["public"]["Tables"]["workout_exercises"]["Row"]
 export type Workout = Database["public"]["Tables"]["workouts"]["Row"]
@@ -71,16 +75,33 @@ export type ExerciseProgressPoint = {
   maxReps: number
 }
 
-export type { MuscleGroup }
+export type { BodyPart }
 
-export const MUSCLE_GROUPS: MuscleGroup[] = [
-  "chest",
+export const BODY_PARTS: BodyPart[] = [
   "back",
-  "legs",
+  "cardio",
+  "chest",
+  "lower arms",
+  "lower legs",
+  "neck",
   "shoulders",
-  "biceps",
-  "triceps",
-  "core",
-  "glutes",
-  "calves",
+  "upper arms",
+  "upper legs",
+  "waist",
 ]
+
+// Raw body_part values contain spaces, which aren't valid next-intl
+// dot-path key segments — look labels up through this map instead of
+// interpolating exercise.body_part directly into t().
+export const BODY_PART_LABEL_KEYS: Record<BodyPart, string> = {
+  back: "back",
+  cardio: "cardio",
+  chest: "chest",
+  "lower arms": "lowerArms",
+  "lower legs": "lowerLegs",
+  neck: "neck",
+  shoulders: "shoulders",
+  "upper arms": "upperArms",
+  "upper legs": "upperLegs",
+  waist: "waist",
+}
