@@ -1,6 +1,13 @@
 {
   "name": "gym-progress-tracker",
   "version": "0.1.0",
+  "description": "App web mobile-first para registrar entrenamientos de gimnasio: rutinas, series, pesos y repeticiones.",
+  "license": "MIT",
+  "author": "Ginés Rodríguez",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ginesrodriguezz/PWA"
+  },
   "private": true,
   "engines": {
     "node": ">=20"

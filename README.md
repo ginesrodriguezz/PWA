@@ -23,7 +23,7 @@ App web mobile-first para registrar entrenamientos de gimnasio: rutinas, series,
 
 1. Crea un proyecto nuevo en [supabase.com/dashboard](https://supabase.com/dashboard).
 2. Ve a **Project Settings → API** y copia `Project URL` y `anon public key`.
-3. Ve a **SQL Editor** y ejecuta, en orden, todos los archivos de `supabase/migrations/` (`0001_init.sql` → `0006_restore_workout_exercises_fk.sql`). También puedes aplicarlos con la [Supabase CLI](https://supabase.com/docs/guides/cli): `supabase db push`. Tras `0005_exercise_library.sql`, importa el catálogo de ejercicios con `npm run import:exercises` (ver variables de entorno adicionales que requiere en `scripts/import-exercises.ts`).
+3. Ve a **SQL Editor** y ejecuta, en orden, todos los archivos de `supabase/migrations/` (`0001_init.sql` → `0008_workout_sets_unique.sql`). También puedes aplicarlos con la [Supabase CLI](https://supabase.com/docs/guides/cli): `supabase db push`. Tras `0005_exercise_library.sql`, importa el catálogo de ejercicios con `npm run import:exercises` (ver variables de entorno adicionales que requiere en `scripts/import-exercises.ts`).
 4. (Opcional) Regenera los tipos TypeScript desde el esquema real:
 
    ```bash
@@ -105,3 +105,7 @@ Después del primer despliegue, en el Dashboard de Supabase → **Authentication
 
 - **Site URL**: la misma URL de producción.
 - **Redirect URLs**: añade `https://tu-app.vercel.app/**` (y el dominio propio si lo usas, y las URLs de preview de Vercel si las necesitas) — si no, los enlaces de confirmación de email y de restablecimiento de contraseña seguirán apuntando a `localhost`.
+
+## Licencia
+
+[MIT](./LICENSE)
