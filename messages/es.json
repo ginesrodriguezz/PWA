@@ -132,7 +132,7 @@
     "finishConfirmDescription": "Se guardará el entrenamiento con las series registradas.",
     "workoutFinished": "¡Entrenamiento guardado!",
     "exitConfirmTitle": "¿Salir del entrenamiento?",
-    "exitConfirmDescription": "Aún no has finalizado el entrenamiento. Si sales ahora, el progreso de hoy no se guardará como completado.",
+    "exitConfirmDescription": "Si sales ahora sin finalizar, se descartará esta sesión (series y sustituciones incluidas). La próxima vez empezarás desde cero con tu rutina original.",
     "exitConfirm": "Salir",
     "weight": "Peso",
     "reps": "Reps",

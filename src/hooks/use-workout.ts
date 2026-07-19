@@ -102,6 +102,13 @@ export function useFinishWorkout() {
   })
 }
 
+export function useDiscardWorkout() {
+  return useMutation({
+    mutationFn: (workoutId: string) =>
+      workoutsService.discardWorkout(createClient(), workoutId),
+  })
+}
+
 export function useStartWorkout() {
   return useMutation({
     mutationFn: async (routineDayId: string) => {

@@ -132,7 +132,7 @@
     "finishConfirmDescription": "The workout will be saved with the sets logged so far.",
     "workoutFinished": "Workout saved!",
     "exitConfirmTitle": "Exit workout?",
-    "exitConfirmDescription": "The workout hasn't been finished yet. If you leave now, today's progress won't be saved as completed.",
+    "exitConfirmDescription": "If you leave now without finishing, this session will be discarded (sets and exercise swaps included). Next time you'll start fresh with your original routine.",
     "exitConfirm": "Exit",
     "weight": "Weight",
     "reps": "Reps",

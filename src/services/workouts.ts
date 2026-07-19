@@ -165,6 +165,19 @@ export async function finishWorkout(
   if (error) throw error
 }
 
+export async function discardWorkout(
+  supabase: SupabaseClient<Database>,
+  workoutId: string
+) {
+  const { error } = await supabase
+    .from("workouts")
+    .delete()
+    .eq("id", workoutId)
+    .is("finished_at", null)
+
+  if (error) throw error
+}
+
 export async function getLastExerciseSets(
   supabase: SupabaseClient<Database>,
   exerciseId: string

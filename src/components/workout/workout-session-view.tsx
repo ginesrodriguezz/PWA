@@ -9,6 +9,7 @@ import { ExerciseStrip } from "@/components/workout/exercise-strip"
 import { ActiveExerciseCard } from "@/components/workout/active-exercise-card"
 import { ConfirmDialog } from "@/components/feedback/confirm-dialog"
 import {
+  useDiscardWorkout,
   useFinishWorkout,
   useReplaceWorkoutExercise,
   useWorkoutSession,
@@ -27,6 +28,7 @@ export function WorkoutSessionView({
   const { data } = useWorkoutSession(initialSession.id, initialSession)
   const session = data ?? initialSession
   const finishWorkout = useFinishWorkout()
+  const discardWorkout = useDiscardWorkout()
   const replaceExercise = useReplaceWorkoutExercise(session.id)
   const [confirmOpen, setConfirmOpen] = React.useState(false)
   const [exitConfirmOpen, setExitConfirmOpen] = React.useState(false)
@@ -56,6 +58,12 @@ export function WorkoutSessionView({
         toast.success(t("workoutFinished"))
         router.push("/entrenar")
       },
+    })
+  }
+
+  function handleExit() {
+    discardWorkout.mutate(session.id, {
+      onSuccess: () => router.push("/entrenar"),
     })
   }
 
@@ -120,7 +128,8 @@ export function WorkoutSessionView({
         onOpenChange={setExitConfirmOpen}
         title={t("exitConfirmTitle")}
         description={t("exitConfirmDescription")}
-        onConfirm={() => router.push("/entrenar")}
+        isPending={discardWorkout.isPending}
+        onConfirm={handleExit}
         confirmLabel={t("exitConfirm")}
         variant="destructive"
       />
