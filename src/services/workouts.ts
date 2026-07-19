@@ -153,6 +153,40 @@ export async function addWorkoutSet(
   return data
 }
 
+export async function removeWorkoutSet(
+  supabase: SupabaseClient<Database>,
+  workoutId: string,
+  workoutExerciseId: string,
+  setId: string
+) {
+  const { error: deleteError } = await supabase
+    .from("workout_sets")
+    .delete()
+    .eq("id", setId)
+  if (deleteError) throw deleteError
+
+  // Renumber the remaining sets sequentially so "Añadir serie" (which always
+  // appends at sortedSets.length + 1) never collides with a leftover gap.
+  const { data: remaining, error: fetchError } = await supabase
+    .from("workout_sets")
+    .select("id, set_number")
+    .eq("workout_id", workoutId)
+    .eq("workout_exercise_id", workoutExerciseId)
+    .order("set_number")
+  if (fetchError) throw fetchError
+
+  for (const [index, row] of (remaining ?? []).entries()) {
+    const newNumber = index + 1
+    if (row.set_number !== newNumber) {
+      const { error } = await supabase
+        .from("workout_sets")
+        .update({ set_number: newNumber })
+        .eq("id", row.id)
+      if (error) throw error
+    }
+  }
+}
+
 export async function finishWorkout(
   supabase: SupabaseClient<Database>,
   workoutId: string

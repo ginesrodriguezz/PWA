@@ -127,6 +127,7 @@
     "noPreviousData": "No previous data",
     "set": "Set {number}",
     "addSet": "Add set",
+    "deleteSet": "Delete set",
     "finishWorkout": "Finish workout",
     "finishConfirmTitle": "Finish workout?",
     "finishConfirmDescription": "The workout will be saved with the sets logged so far.",

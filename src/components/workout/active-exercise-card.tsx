@@ -8,6 +8,7 @@ import {
   ListOrderedIcon,
   PlusIcon,
   RefreshCwIcon,
+  Trash2Icon,
 } from "lucide-react"
 import { useFormatter, useLocale, useTranslations } from "next-intl"
 import { Badge } from "@/components/ui/badge"
@@ -22,7 +23,11 @@ import {
 import { ExercisePicker } from "@/components/routines/exercise-picker"
 import { WeightInput } from "@/components/inputs/weight-input"
 import { RepInput } from "@/components/inputs/rep-input"
-import { useAddWorkoutSet, useUpdateWorkoutSet } from "@/hooks/use-workout"
+import {
+  useAddWorkoutSet,
+  useRemoveWorkoutSet,
+  useUpdateWorkoutSet,
+} from "@/hooks/use-workout"
 import { getExerciseMediaUrl } from "@/lib/exercise-media"
 import { cn } from "@/lib/utils"
 import { BODY_PART_LABEL_KEYS, getExerciseName } from "@/types/domain"
@@ -65,6 +70,7 @@ export function ActiveExerciseCard({
 
   const updateSet = useUpdateWorkoutSet(workoutId)
   const addSet = useAddWorkoutSet(workoutId)
+  const removeSet = useRemoveWorkoutSet(workoutId)
 
   const sortedSets = [...sets].sort((a, b) => a.set_number - b.set_number)
   const firstLast = lastSets[0]
@@ -165,30 +171,30 @@ export function ActiveExerciseCard({
               <div
                 key={set.id}
                 className={cn(
-                  "flex items-center gap-2 rounded-lg border bg-background px-2.5 py-2",
+                  "flex items-center gap-1.5 rounded-lg border bg-background px-2 py-2",
                   set.completed && "border-primary/40 bg-primary/5"
                 )}
               >
-                <span className="w-14 shrink-0 text-xs text-muted-foreground">
-                  {t("set", { number: set.set_number })}
+                <span
+                  className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium"
+                  aria-label={t("set", { number: set.set_number })}
+                >
+                  {set.set_number}
                 </span>
                 <WeightInput
                   value={set.weight}
+                  placeholder={last?.weight?.toString()}
                   onCommit={(weight) =>
                     updateSet.mutate({ id: set.id, patch: { weight } })
                   }
                 />
                 <RepInput
                   value={set.reps}
+                  placeholder={last?.reps?.toString()}
                   onCommit={(reps) =>
                     updateSet.mutate({ id: set.id, patch: { reps } })
                   }
                 />
-                {!set.weight && !set.reps && last && (
-                  <span className="hidden text-[10px] text-muted-foreground sm:inline">
-                    {last.weight ?? "–"}×{last.reps ?? "–"}
-                  </span>
-                )}
                 <Button
                   type="button"
                   size="icon-sm"
@@ -203,6 +209,21 @@ export function ActiveExerciseCard({
                   }
                 >
                   <CheckIcon className="size-4" />
+                </Button>
+                <Button
+                  type="button"
+                  size="icon-sm"
+                  variant="ghost"
+                  className="shrink-0"
+                  aria-label={t("deleteSet")}
+                  onClick={() =>
+                    removeSet.mutate({
+                      workoutExerciseId: workoutExercise.id,
+                      setId: set.id,
+                    })
+                  }
+                >
+                  <Trash2Icon className="size-4 text-muted-foreground" />
                 </Button>
               </div>
             )

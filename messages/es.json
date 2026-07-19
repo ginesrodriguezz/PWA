@@ -127,6 +127,7 @@
     "noPreviousData": "Sin registros previos",
     "set": "Serie {number}",
     "addSet": "Añadir serie",
+    "deleteSet": "Eliminar serie",
     "finishWorkout": "Finalizar entrenamiento",
     "finishConfirmTitle": "¿Finalizar entrenamiento?",
     "finishConfirmDescription": "Se guardará el entrenamiento con las series registradas.",
