@@ -131,12 +131,21 @@
     "finishConfirmTitle": "¿Finalizar entrenamiento?",
     "finishConfirmDescription": "Se guardará el entrenamiento con las series registradas.",
     "workoutFinished": "¡Entrenamiento guardado!",
+    "exitConfirmTitle": "¿Salir del entrenamiento?",
+    "exitConfirmDescription": "Aún no has finalizado el entrenamiento. Si sales ahora, el progreso de hoy no se guardará como completado.",
+    "exitConfirm": "Salir",
     "weight": "Peso",
     "reps": "Reps",
-    "completed": "Hecha"
+    "completed": "Hecha",
+    "steps": "Pasos",
+    "skipExercise": "Saltar",
+    "replaceExercise": "Sustituir",
+    "chooseReplacement": "Sustituir ejercicio",
+    "swapped": "Sustituido"
   },
   "dashboard": {
     "title": "Inicio",
+    "viewStats": "Ver estadísticas",
     "nextWorkout": "Próximo entrenamiento",
     "lastWorkout": "Último entrenamiento",
     "totalWorkouts": "Entrenamientos",
@@ -153,6 +162,11 @@
     "title": "Historial",
     "noWorkouts": "Aún no hay entrenamientos guardados",
     "noWorkoutsDescription": "Cuando termines un entrenamiento aparecerá aquí.",
+    "noResults": "Ningún entrenamiento coincide con estos filtros",
+    "searchPlaceholder": "Buscar por rutina o día...",
+    "dateFrom": "Desde",
+    "dateTo": "Hasta",
+    "clearFilters": "Limpiar filtros",
     "sets": "{count, plural, =0 {0 series} one {1 serie} other {# series}}",
     "volume": "Volumen",
     "duration": "Duración",
@@ -160,15 +174,28 @@
     "page": "Página {page}",
     "detailTitle": "Detalle del entrenamiento"
   },
-  "progress": {
-    "title": "Progresión",
-    "selectExercise": "Elige un ejercicio para ver tu progreso",
+  "statistics": {
+    "title": "Estadísticas",
+    "subtitle": "Sigue tu récord personal en cada ejercicio",
+    "noWorkoutsYet": "Termina un entrenamiento para empezar a ver tus estadísticas",
     "noData": "Aún no tienes registros para este ejercicio",
     "personalRecord": "Récord personal",
+    "estimatedOneRepMax": "1RM estimado",
     "bestVolume": "Mayor volumen",
     "bestReps": "Mayor repetición",
     "weightChart": "Peso máximo por sesión",
-    "volumeChart": "Volumen por sesión"
+    "volumeChart": "Volumen por sesión",
+    "exercisesTracked": "Ejercicios entrenados",
+    "recentPRs": "PRs este mes",
+    "allTimeVolume": "Volumen histórico",
+    "strongestLift": "Levantamiento más fuerte",
+    "newPr": "Nuevo récord personal",
+    "sortBy": "Ordenar por",
+    "sort": {
+      "recent": "Más reciente",
+      "alphabetical": "Alfabético",
+      "highestPR": "Mayor PR"
+    }
   },
   "profile": {
     "title": "Perfil",

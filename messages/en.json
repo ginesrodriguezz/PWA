@@ -131,12 +131,21 @@
     "finishConfirmTitle": "Finish workout?",
     "finishConfirmDescription": "The workout will be saved with the sets logged so far.",
     "workoutFinished": "Workout saved!",
+    "exitConfirmTitle": "Exit workout?",
+    "exitConfirmDescription": "The workout hasn't been finished yet. If you leave now, today's progress won't be saved as completed.",
+    "exitConfirm": "Exit",
     "weight": "Weight",
     "reps": "Reps",
-    "completed": "Done"
+    "completed": "Done",
+    "steps": "Steps",
+    "skipExercise": "Skip",
+    "replaceExercise": "Replace",
+    "chooseReplacement": "Replace exercise",
+    "swapped": "Replaced"
   },
   "dashboard": {
     "title": "Home",
+    "viewStats": "View statistics",
     "nextWorkout": "Next workout",
     "lastWorkout": "Last workout",
     "totalWorkouts": "Workouts",
@@ -153,6 +162,11 @@
     "title": "History",
     "noWorkouts": "No workouts saved yet",
     "noWorkoutsDescription": "When you finish a workout it will show up here.",
+    "noResults": "No workouts match these filters",
+    "searchPlaceholder": "Search by routine or day...",
+    "dateFrom": "From",
+    "dateTo": "To",
+    "clearFilters": "Clear filters",
     "sets": "{count, plural, =0 {0 sets} one {1 set} other {# sets}}",
     "volume": "Volume",
     "duration": "Duration",
@@ -160,15 +174,28 @@
     "page": "Page {page}",
     "detailTitle": "Workout detail"
   },
-  "progress": {
-    "title": "Progress",
-    "selectExercise": "Pick an exercise to see your progress",
+  "statistics": {
+    "title": "Statistics",
+    "subtitle": "Track your personal records across every exercise",
+    "noWorkoutsYet": "Finish a workout to start tracking your statistics",
     "noData": "No records yet for this exercise",
     "personalRecord": "Personal record",
+    "estimatedOneRepMax": "Estimated 1RM",
     "bestVolume": "Best volume",
     "bestReps": "Best reps",
     "weightChart": "Max weight per session",
-    "volumeChart": "Volume per session"
+    "volumeChart": "Volume per session",
+    "exercisesTracked": "Exercises tracked",
+    "recentPRs": "PRs this month",
+    "allTimeVolume": "All-time volume",
+    "strongestLift": "Strongest lift",
+    "newPr": "New personal record",
+    "sortBy": "Sort by",
+    "sort": {
+      "recent": "Most recent",
+      "alphabetical": "Alphabetical",
+      "highestPR": "Highest PR"
+    }
   },
   "profile": {
     "title": "Profile",

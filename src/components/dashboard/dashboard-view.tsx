@@ -1,4 +1,10 @@
-import { CalendarIcon, DumbbellIcon, FlameIcon, TrendingUpIcon } from "lucide-react"
+import {
+  BarChart3Icon,
+  CalendarIcon,
+  DumbbellIcon,
+  FlameIcon,
+  TrendingUpIcon,
+} from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button"
@@ -18,9 +24,21 @@ export async function DashboardView({
 
   return (
     <div className="flex flex-col gap-5 p-4">
-      <h1 className="text-xl font-semibold">
-        {t("title")} · {userName}
-      </h1>
+      <div className="flex items-center justify-between gap-2">
+        <h1 className="text-xl font-semibold">
+          {t("title")} · {userName}
+        </h1>
+        <Link href="/estadisticas">
+          <Button
+            size="sm"
+            variant="outline"
+            className="rounded-full"
+            aria-label={t("viewStats")}
+          >
+            <BarChart3Icon className="size-4" />
+          </Button>
+        </Link>
+      </div>
 
       <div className="rounded-xl border bg-card p-4">
         <p className="text-xs font-medium text-muted-foreground">

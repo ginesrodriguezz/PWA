@@ -236,6 +236,49 @@ export type Database = {
           },
         ]
       }
+      workout_exercise_swaps: {
+        Row: {
+          id: string
+          workout_id: string
+          workout_exercise_id: string
+          exercise_id: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          workout_id: string
+          workout_exercise_id: string
+          exercise_id: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          workout_id?: string
+          workout_exercise_id?: string
+          exercise_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workout_exercise_swaps_workout_id_fkey"
+            columns: ["workout_id"]
+            referencedRelation: "workouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "workout_exercise_swaps_workout_exercise_id_fkey"
+            columns: ["workout_exercise_id"]
+            referencedRelation: "workout_exercises"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "workout_exercise_swaps_exercise_id_fkey"
+            columns: ["exercise_id"]
+            referencedRelation: "exercises"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: Record<string, never>
     Functions: {
@@ -251,6 +294,26 @@ export type Database = {
       get_total_volume: {
         Args: Record<string, never>
         Returns: number
+      }
+      search_workout_history: {
+        Args: {
+          p_search?: string | null
+          p_date_from?: string | null
+          p_date_to?: string | null
+          p_limit?: number
+          p_offset?: number
+        }
+        Returns: {
+          id: string
+          started_at: string
+          finished_at: string
+          day_name: string
+          routine_name: string
+          total_sets: number
+          completed_sets: number
+          volume: number
+          total_count: number
+        }[]
       }
     }
   }

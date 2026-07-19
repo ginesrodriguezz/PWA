@@ -3,7 +3,6 @@
 import * as React from "react"
 import { ArrowLeftIcon, CheckIcon, TimerIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { Link } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button"
 
 function formatElapsed(ms: number) {
@@ -20,11 +19,13 @@ function formatElapsed(ms: number) {
 export function WorkoutHeader({
   title,
   startedAt,
+  onBack,
   onFinish,
   isFinishing,
 }: {
   title: string
   startedAt: string
+  onBack: () => void
   onFinish: () => void
   isFinishing?: boolean
 }) {
@@ -43,11 +44,9 @@ export function WorkoutHeader({
   return (
     <div className="sticky top-0 z-10 flex items-center justify-between gap-2 border-b bg-background/95 px-4 py-3 backdrop-blur supports-backdrop-filter:bg-background/80">
       <div className="flex min-w-0 items-center gap-2">
-        <Link href="/entrenar" aria-label="back">
-          <Button size="icon-sm" variant="ghost">
-            <ArrowLeftIcon className="size-4" />
-          </Button>
-        </Link>
+        <Button size="icon-sm" variant="ghost" aria-label="back" onClick={onBack}>
+          <ArrowLeftIcon className="size-4" />
+        </Button>
         <div className="min-w-0">
           <p className="truncate text-sm font-semibold">{title}</p>
           <p className="flex items-center gap-1 text-xs text-muted-foreground">

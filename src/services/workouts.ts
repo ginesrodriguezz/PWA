@@ -1,6 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
 import type { Database } from "@/types/database.types"
-import type { WorkoutSession, LastExerciseSets } from "@/types/domain"
+import type { Exercise, WorkoutSession, LastExerciseSets } from "@/types/domain"
 
 export async function getOrCreateActiveWorkout(
   supabase: SupabaseClient<Database>,
@@ -54,7 +54,31 @@ export async function getWorkoutSession(
 
   if (setsError) throw setsError
 
-  return { ...data, workout_sets: sets } as WorkoutSession
+  const { data: swaps, error: swapsError } = await supabase
+    .from("workout_exercise_swaps")
+    .select("workout_exercise_id, exercise:exercises(*)")
+    .eq("workout_id", workoutId)
+
+  if (swapsError) throw swapsError
+
+  const exerciseSwaps = Object.fromEntries(
+    (swaps ?? []).map((s) => [s.workout_exercise_id, s.exercise as Exercise])
+  )
+
+  return { ...data, workout_sets: sets, exerciseSwaps } as WorkoutSession
+}
+
+export async function replaceWorkoutExercise(
+  supabase: SupabaseClient<Database>,
+  workoutId: string,
+  workoutExerciseId: string,
+  exerciseId: string
+) {
+  const { error } = await supabase.from("workout_exercise_swaps").upsert(
+    { workout_id: workoutId, workout_exercise_id: workoutExerciseId, exercise_id: exerciseId },
+    { onConflict: "workout_id,workout_exercise_id" }
+  )
+  if (error) throw error
 }
 
 export async function ensureWorkoutSets(

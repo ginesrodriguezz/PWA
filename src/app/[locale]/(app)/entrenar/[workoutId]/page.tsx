@@ -32,10 +32,14 @@ export default async function EntrenarSessionPage({
   if (!session) notFound()
 
   const lastSetsEntries = await Promise.all(
-    session.routine_day.workout_exercises.map(async (we) => [
-      we.exercise_id,
-      await getLastExerciseSets(supabase, we.exercise_id),
-    ] as const)
+    session.routine_day.workout_exercises.map(async (we) => {
+      const effectiveExerciseId =
+        session!.exerciseSwaps[we.id]?.id ?? we.exercise_id
+      return [
+        effectiveExerciseId,
+        await getLastExerciseSets(supabase, effectiveExerciseId),
+      ] as const
+    })
   )
   const lastSetsByExercise = Object.fromEntries(lastSetsEntries)
 

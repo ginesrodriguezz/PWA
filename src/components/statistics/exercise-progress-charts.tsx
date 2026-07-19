@@ -17,7 +17,7 @@ export function ExerciseProgressCharts({
 }: {
   data: ExerciseProgressPoint[]
 }) {
-  const t = useTranslations("progress")
+  const t = useTranslations("statistics")
   const tWorkout = useTranslations("workout")
   const tHistory = useTranslations("history")
   const format = useFormatter()

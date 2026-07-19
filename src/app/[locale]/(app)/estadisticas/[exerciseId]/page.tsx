@@ -6,10 +6,11 @@ import { getExerciseProgress } from "@/services/progress"
 import { Link } from "@/i18n/navigation"
 import { Badge } from "@/components/ui/badge"
 import { StatsCard } from "@/components/cards/stats-card"
-import { ExerciseProgressCharts } from "@/components/progress/exercise-progress-charts"
+import { ExerciseProgressCharts } from "@/components/statistics/exercise-progress-charts"
 import { BODY_PART_LABEL_KEYS, getExerciseName } from "@/types/domain"
+import { estimateOneRepMax } from "@/lib/utils"
 
-export default async function ExerciseProgressPage({
+export default async function ExerciseStatisticsPage({
   params,
 }: {
   params: Promise<{ exerciseId: string }>
@@ -29,7 +30,7 @@ export default async function ExerciseProgressPage({
   if (!exercise) notFound()
 
   const progress = await getExerciseProgress(supabase, user!.id, exerciseId)
-  const t = await getTranslations("progress")
+  const t = await getTranslations("statistics")
   const tExercises = await getTranslations("exercises")
   const locale = await getLocale()
 
@@ -39,11 +40,15 @@ export default async function ExerciseProgressPage({
   )
   const bestVolume = progress.reduce((max, p) => Math.max(max, p.volume), 0)
   const bestReps = progress.reduce((max, p) => Math.max(max, p.maxReps), 0)
+  const estimatedOneRepMax = progress.reduce(
+    (max, p) => Math.max(max, estimateOneRepMax(p.maxWeight, p.maxReps)),
+    0
+  )
 
   return (
     <div className="flex flex-col gap-4 p-4">
       <Link
-        href="/progresion"
+        href="/estadisticas"
         className="flex w-fit items-center gap-1 text-sm text-muted-foreground"
       >
         <ArrowLeftIcon className="size-4" />
@@ -65,11 +70,15 @@ export default async function ExerciseProgressPage({
         </p>
       ) : (
         <>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             <StatsCard
               label={t("personalRecord")}
               value={`${personalRecord} kg`}
               icon={TrophyIcon}
+            />
+            <StatsCard
+              label={t("estimatedOneRepMax")}
+              value={`${Math.round(estimatedOneRepMax)} kg`}
             />
             <StatsCard
               label={t("bestVolume")}

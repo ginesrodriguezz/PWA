@@ -22,11 +22,13 @@ export function ExercisePicker({
   onOpenChange,
   existingExerciseIds,
   onAdd,
+  title,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
   existingExerciseIds: string[]
   onAdd: (exerciseId: string) => void
+  title?: string
 }) {
   const t = useTranslations("exercises")
   const [search, setSearch] = React.useState("")
@@ -34,13 +36,14 @@ export function ExercisePicker({
 
   const { data: exercises, isLoading } = useExercises({ search, bodyPart })
   const existing = new Set(existingExerciseIds)
+  const sheetTitle = title ?? t("title")
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="bottom" className="h-[85dvh]">
         <SheetHeader>
-          <SheetTitle>{t("title")}</SheetTitle>
-          <SheetDescription className="sr-only">{t("title")}</SheetDescription>
+          <SheetTitle>{sheetTitle}</SheetTitle>
+          <SheetDescription className="sr-only">{sheetTitle}</SheetDescription>
         </SheetHeader>
 
         <div className="flex flex-col gap-3 px-4">

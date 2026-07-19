@@ -8,8 +8,13 @@ export default function EntrenarSessionLoading() {
         <Skeleton className="h-8 w-28 rounded-full" />
       </div>
       <div className="flex flex-col gap-4 px-4 pb-4">
-        <Skeleton className="h-40 w-full rounded-xl" />
-        <Skeleton className="h-40 w-full rounded-xl" />
+        <div className="flex gap-2">
+          <Skeleton className="size-14 shrink-0 rounded-lg" />
+          <Skeleton className="size-14 shrink-0 rounded-lg" />
+          <Skeleton className="size-14 shrink-0 rounded-lg" />
+        </div>
+        <Skeleton className="aspect-square w-full rounded-xl" />
+        <Skeleton className="h-6 w-40" />
         <Skeleton className="h-40 w-full rounded-xl" />
       </div>
     </div>

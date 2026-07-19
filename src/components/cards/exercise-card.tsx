@@ -1,5 +1,6 @@
 "use client"
 
+import type { ReactNode } from "react"
 import { CheckIcon, PlusIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import { Badge } from "@/components/ui/badge"
@@ -18,11 +19,13 @@ export function ExerciseCard({
   onAdd,
   added,
   href,
+  trailing,
 }: {
   exercise: ExerciseListItem
   onAdd?: () => void
   added?: boolean
   href?: string
+  trailing?: ReactNode
 }) {
   const t = useTranslations("exercises")
   const locale = useLocale()
@@ -49,7 +52,8 @@ export function ExerciseCard({
           {t(`bodyParts.${BODY_PART_LABEL_KEYS[exercise.body_part]}`)}
         </Badge>
       </div>
-      {onAdd && (
+      {trailing}
+      {!trailing && onAdd && (
         <Button
           type="button"
           size="icon-sm"

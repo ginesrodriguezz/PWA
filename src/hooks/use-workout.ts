@@ -73,6 +73,28 @@ export function useAddWorkoutSet(workoutId: string) {
   })
 }
 
+export function useReplaceWorkoutExercise(workoutId: string) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      workoutExerciseId,
+      exerciseId,
+    }: {
+      workoutExerciseId: string
+      exerciseId: string
+    }) =>
+      workoutsService.replaceWorkoutExercise(
+        createClient(),
+        workoutId,
+        workoutExerciseId,
+        exerciseId
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["workout", workoutId] })
+    },
+  })
+}
+
 export function useFinishWorkout() {
   return useMutation({
     mutationFn: (workoutId: string) =>

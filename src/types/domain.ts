@@ -27,6 +27,8 @@ export type RoutineWithDays = Routine & {
 export type WorkoutSession = Workout & {
   routine_day: RoutineDayWithExercises
   workout_sets: WorkoutSet[]
+  // workout_exercise_id -> replacement exercise, for this session only
+  exerciseSwaps: Record<string, Exercise>
 }
 
 export type LastExerciseSets = {
@@ -73,6 +75,27 @@ export type ExerciseProgressPoint = {
   maxWeight: number
   volume: number
   maxReps: number
+}
+
+export type ExercisePRSummary = {
+  exerciseId: string
+  exercise: ExerciseListItem
+  sessionsCount: number
+  personalRecordKg: number
+  bestVolumeKg: number
+  bestReps: number
+  lastSessionDate: string
+  lastSessionMaxWeight: number
+  trendDeltaKg: number | null
+  isRecentPR: boolean
+}
+
+export type StatisticsOverview = {
+  exercises: ExercisePRSummary[]
+  totalExercisesTracked: number
+  recentPRCount: number
+  allTimeVolumeKg: number
+  strongestLift: { exerciseId: string; weightKg: number } | null
 }
 
 export type { BodyPart }
