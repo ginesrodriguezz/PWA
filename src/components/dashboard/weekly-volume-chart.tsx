@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
-import { useFormatter, useLocale } from "next-intl"
+import { useFormatter, useLocale, useTranslations } from "next-intl"
 
 export function WeeklyVolumeChart({
   data,
@@ -17,6 +17,7 @@ export function WeeklyVolumeChart({
 }) {
   const format = useFormatter()
   const locale = useLocale()
+  const tHistory = useTranslations("history")
 
   const chartData = data.map((d) => ({
     ...d,
@@ -39,8 +40,19 @@ export function WeeklyVolumeChart({
           />
           <YAxis tick={{ fontSize: 10 }} tickLine={false} axisLine={false} width={32} />
           <Tooltip
-            formatter={(value) => [`${Number(value).toLocaleString()} kg`, ""]}
-            contentStyle={{ fontSize: 12 }}
+            formatter={(value) => [
+              `${Number(value).toLocaleString()} kg`,
+              tHistory("volume"),
+            ]}
+            contentStyle={{
+              fontSize: 12,
+              background: "var(--popover)",
+              color: "var(--popover-foreground)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-md)",
+            }}
+            labelStyle={{ color: "var(--popover-foreground)" }}
+            itemStyle={{ color: "var(--popover-foreground)" }}
           />
           <Bar dataKey="volume" fill="var(--primary)" radius={[4, 4, 0, 0]} />
         </BarChart>

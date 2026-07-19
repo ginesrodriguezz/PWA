@@ -18,7 +18,19 @@ export function ExerciseProgressCharts({
   data: ExerciseProgressPoint[]
 }) {
   const t = useTranslations("progress")
+  const tWorkout = useTranslations("workout")
+  const tHistory = useTranslations("history")
   const format = useFormatter()
+
+  const tooltipContentStyle = {
+    fontSize: 12,
+    background: "var(--popover)",
+    color: "var(--popover-foreground)",
+    border: "1px solid var(--border)",
+    borderRadius: "var(--radius-md)",
+  }
+  const tooltipLabelStyle = { color: "var(--popover-foreground)" }
+  const tooltipItemStyle = { color: "var(--popover-foreground)" }
 
   const chartData = data.map((d) => ({
     ...d,
@@ -38,8 +50,10 @@ export function ExerciseProgressCharts({
               <XAxis dataKey="label" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
               <YAxis tick={{ fontSize: 10 }} tickLine={false} axisLine={false} width={32} />
               <Tooltip
-                formatter={(value) => [`${Number(value)} kg`, ""]}
-                contentStyle={{ fontSize: 12 }}
+                formatter={(value) => [`${Number(value)} kg`, tWorkout("weight")]}
+                contentStyle={tooltipContentStyle}
+                labelStyle={tooltipLabelStyle}
+                itemStyle={tooltipItemStyle}
               />
               <Line
                 type="monotone"
@@ -64,8 +78,10 @@ export function ExerciseProgressCharts({
               <XAxis dataKey="label" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} />
               <YAxis tick={{ fontSize: 10 }} tickLine={false} axisLine={false} width={32} />
               <Tooltip
-                formatter={(value) => [`${Number(value)} kg`, ""]}
-                contentStyle={{ fontSize: 12 }}
+                formatter={(value) => [`${Number(value)} kg`, tHistory("volume")]}
+                contentStyle={tooltipContentStyle}
+                labelStyle={tooltipLabelStyle}
+                itemStyle={tooltipItemStyle}
               />
               <Line
                 type="monotone"

@@ -173,6 +173,7 @@
   "profile": {
     "title": "Profile",
     "email": "Email",
+    "appearance": "Appearance",
     "nameUpdated": "Name updated",
     "passwordChanged": "Password updated",
     "changePassword": "Change password",

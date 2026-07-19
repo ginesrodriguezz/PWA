@@ -20,7 +20,10 @@ export function EntrenarView({ days }: { days: DayWithRoutine[] }) {
 
   function handleStart(dayId: string) {
     startWorkout.mutate(dayId, {
-      onSuccess: (workout) => router.push(`/entrenar/${workout.id}`),
+      onSuccess: (workout) => {
+        router.push(`/entrenar/${workout.id}`)
+        router.refresh()
+      },
     })
   }
 

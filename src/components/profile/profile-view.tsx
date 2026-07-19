@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import { LogOutIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { ThemeToggle } from "@/components/layout/theme-toggle"
 import {
   Form,
   FormControl,
@@ -77,6 +78,11 @@ export function ProfileView({
       <div className="rounded-xl border bg-card p-4">
         <p className="text-xs text-muted-foreground">{t("email")}</p>
         <p className="font-medium">{email}</p>
+      </div>
+
+      <div className="flex items-center justify-between gap-2 rounded-xl border bg-card p-4">
+        <p className="text-sm font-medium">{t("appearance")}</p>
+        <ThemeToggle />
       </div>
 
       <Form {...nameForm}>

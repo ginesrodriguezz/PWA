@@ -75,7 +75,8 @@ export async function ensureWorkoutSets(
         .filter((s) => s.workout_exercise_id === we.id)
         .map((s) => s.set_number)
     )
-    for (let n = 1; n <= we.target_sets; n++) {
+    const targetSets = we.target_sets > 0 ? we.target_sets : 3
+    for (let n = 1; n <= targetSets; n++) {
       if (!existingNumbers.has(n)) {
         rows.push({
           workout_id: workoutId,
@@ -89,7 +90,7 @@ export async function ensureWorkoutSets(
   if (rows.length === 0) return
 
   const { error } = await supabase.from("workout_sets").upsert(rows, {
-    onConflict: "workout_exercise_id,set_number",
+    onConflict: "workout_id,workout_exercise_id,set_number",
     ignoreDuplicates: true,
   })
   if (error) throw error
